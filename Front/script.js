@@ -19,7 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await response.json();
 
       document.getElementById("result").innerHTML =
-        `<p>Short URL: <a href="${data.short_url}" target="_blank">${data.short_url}</a></p>`;
+        // `<p>Short URL: <a href="${data.short_url}" target="_blank">${data.short_url}</a></p>`;
+        `<p>Short URL: <a href="https://www.youtube.com/" target="_blank">${data.short_url}</a></p>`;
     } catch (err) {
       console.error("Error:", err);
       document.getElementById("result").textContent = "Failed to shorten URL.";
@@ -27,12 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
-
-
-
-
-
-
-
+//leaving a note here to try reciving a long and small url disply the short and href be the long 
+//but i dont think thats HOW they actually work i think its more when using a db and getting the short one based on the long one
+// https://www.youtube.com/
 
