@@ -1,11 +1,10 @@
-package main //for testing can be main once its all working change to models
+package modles
 
 import (
 	"UrlShort/env"
 	"context"
 	"fmt"
 	"log"
-
 	"github.com/jackc/pgx/v5"
 )
 
@@ -27,13 +26,34 @@ func ConnectDB()  *pgx.Conn{
 	return conn
 }
 
-	// defer conn.Close(ctx)
-	//use this in the main.go file when using these function refer to tracker backend for more 
-func main()  {
-	ConnectDB()
+func InsertInto(conn *pgx.Conn, short_url string, long_url string) string{
+	_, err := conn.Exec(context.Background(), "insert into urls (short_url, long_url) values ($1, $2)", short_url, long_url)
+
+	if err != nil {
+		panic(err)
+	}
+	return "Inserted long and short"
 }
 
+func GetLongId(conn *pgx.Conn, short_url string)string{
+
+
+	long_url_from_DB := "Test"
+	return  long_url_from_DB
+}
+
+
 //just use this function as an example moving forward 
+// func CreateTable(conn *pgx.Conn) string{
+// 	_, err := conn.Exec(context.Background(), "CREATE TABLE urls (id SERIAL PRIMARY KEY, short_url TEXT NOT NULL, long_url TEXT NOT NULL)")
+//
+// 	if err != nil {
+// 		panic(err)
+// 	}
+// 	return "Created table"
+// }
+
+// use this code to get the long url from the short one 
 // func InsertIntoSearchedFood(conn *pgx.Conn, nameOfFood string, calsOfFood int) string{
 // 	var food Food
 // 	err := conn.QueryRow(
@@ -53,4 +73,3 @@ func main()  {
 // 	returned := fmt.Sprintf("\nInserted: %s", foodData)
 // 	return returned
 // }
-//

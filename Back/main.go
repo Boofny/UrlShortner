@@ -1,6 +1,8 @@
 package main
 
 import (
+	"UrlShort/models"
+	"context"
 	"log"
 	"net/http"
 
@@ -10,6 +12,10 @@ import (
 
 
 func main() {
+	conn := modles.ConnectDB()
+	
+	defer conn.Close(context.Background())
+
 	e := echo.New()
 
 	e.Use(middleware.CORS()) // allow all origins for dev
@@ -28,6 +34,7 @@ func main() {
 			})
 		}
 		short := link.Url
+		modles.InsertInto(conn, short, "jdioejidej")
 		log.Println(short)
 		//this is what the front end will get and "test" will be the shortend url 
 		return c.JSON(http.StatusOK, map[string]interface{}{
@@ -36,3 +43,8 @@ func main() {
 	})
 	e.Logger.Fatal(e.Start(":8081"))
 }
+
+
+
+
+
