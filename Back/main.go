@@ -12,7 +12,7 @@ import (
 
 
 func main() {
-	conn := modles.ConnectDB()
+	conn := models.ConnectDB()
 	
 	defer conn.Close(context.Background())
 
@@ -34,7 +34,7 @@ func main() {
 			})
 		}
 		short := link.Url
-		modles.InsertInto(conn, short, "jdioejidej")
+		models.InsertInto(conn, short, "jdioejidej")
 		log.Println(short)
 		//this is what the front end will get and "test" will be the shortend url 
 		return c.JSON(http.StatusOK, map[string]interface{}{
