@@ -30,7 +30,7 @@ func InsertInto(conn *pgx.Conn, short_url string, long_url string) string{
 	_, err := conn.Exec(context.Background(), "insert into urls (short_url, long_url) values ($1, $2)", short_url, long_url)
 
 	if err != nil {
-		panic(err)
+		log.Println("Erro inserting in to DB")
 	}
 	return "Inserted long and short"
 }
